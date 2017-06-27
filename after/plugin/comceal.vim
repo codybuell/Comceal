@@ -53,12 +53,7 @@ fun! s:matchComment()
     let l:commentstr = &commentstring
   endif
   let l:pattern = s:singleComment() ? '.*' : '\\\_.\\{-\}'
-  if exists("g:comceal_start_level")
-    let l:startlevel = g:comceal_start_level
-  else
-    let l:startlevel = &conceallevel
-  endif
-  let s:counter = index(g:comceal_list,l:startlevel)
+  let s:counter = index(g:comceal_list,&conceallevel)
   let l:commentstr = substitute(escape(l:commentstr,'"*/'),'\s*','','g')
   let s:commentString = '^\s*' . substitute(l:commentstr,'%s',l:pattern,'')
   exe 'syntax match matchComment "' . s:commentString .'" conceal cchar='.g:comceal_char
